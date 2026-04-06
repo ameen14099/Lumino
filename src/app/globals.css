@@ -1,26 +1,165 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-background: #fafbfc;
+  --color-foreground: #0f1419;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-border: #e8ecf0;
+  --color-border-subtle: #f0f3f6;
+  --color-muted: #6b7b8d;
+  --color-muted-foreground: #8899a6;
+
+  /* Primary: Vibrant teal-green */
+  --color-primary: #00BFA5;
+  --color-primary-hover: #00A893;
+  --color-primary-light: #E0F7F3;
+  --color-primary-dark: #00897B;
+  --color-primary-foreground: #ffffff;
+
+  /* Accent: Warm amber for achievements */
+  --color-accent: #FFB300;
+  --color-accent-hover: #FFA000;
+  --color-accent-light: #FFF8E1;
+  --color-accent-foreground: #1a1a1a;
+
+  /* Wisdom purple for depth/premium */
+  --color-wisdom: #7E57C2;
+  --color-wisdom-light: #EDE7F6;
+
+  /* Energy red for streaks/urgency */
+  --color-energy: #FF5252;
+  --color-energy-light: #FFEBEE;
+
+  /* Success green */
+  --color-success: #4CAF50;
+  --color-success-light: #E8F5E9;
+
+  /* Category colors */
+  --color-cat-habits: #00BFA5;
+  --color-cat-productivity: #5C6BC0;
+  --color-cat-effectiveness: #FF7043;
+  --color-cat-psychology: #AB47BC;
+  --color-cat-finance: #FFB300;
+  --color-cat-toughness: #E53935;
+
+  /* Fonts */
+  --font-sans: var(--font-nunito);
+  --font-display: var(--font-nunito);
   --font-mono: var(--font-geist-mono);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Glow effects for concept nodes */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 191, 165, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(0, 191, 165, 0.4); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, var(--color-accent), #FF8F00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Concept node base style */
+.concept-node {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.concept-node:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+/* Mode switcher tab active state */
+.mode-tab-active {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 4px 14px rgba(0, 191, 165, 0.3);
 }
