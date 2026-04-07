@@ -1,10 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BookOpen, Clock, Users, ChevronRight } from 'lucide-react';
+import { BookOpen, Clock, Users, ChevronRight, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { books } from '@/data/books';
 import { formatNumber, getDifficultyLabel } from '@/lib/utils';
+
+const displayBooks = books.slice(0, 6);
 
 export default function BookGrid() {
   return (
@@ -27,13 +29,20 @@ export default function BookGrid() {
               transition={{ delay: 0.1 }}
               className="text-muted text-lg"
             >
-              Start with any book — no signup required
+              {books.length} books — start with any, no signup required
             </motion.p>
           </div>
+          <Link
+            href="/library"
+            className="hidden sm:flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+          >
+            View all {books.length}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {books.map((book, i) => (
+          {displayBooks.map((book, i) => (
             <motion.div
               key={book.id}
               initial={{ opacity: 0, y: 30 }}
@@ -91,6 +100,16 @@ export default function BookGrid() {
               </Link>
             </motion.div>
           ))}
+        </div>
+
+        <div className="text-center mt-8 sm:hidden">
+          <Link
+            href="/library"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl text-sm font-bold hover:bg-primary-hover transition-colors"
+          >
+            View All {books.length} Books
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>
